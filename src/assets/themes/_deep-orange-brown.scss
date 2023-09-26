@@ -1,0 +1,160 @@
+@use "sass:map";
+@use "@angular/material" as mat;
+
+mat.$theme-ignore-duplication-warnings: true;
+
+@include mat.core();
+
+$md-primary: (
+  50: #fbe9e7,
+  100: #ffccbc,
+  200: #ffab91,
+  300: #ff8a65,
+  400: #ff7043,
+  500: #ff5722,
+  600: #f4511e,
+  700: #e64a19,
+  800: #d84315,
+  900: #bf360c,
+  A100: #ff9e80,
+  A200: #ff6e40,
+  A400: #ff3d00,
+  A700: #dd2c00,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(black, 0.87),
+    A200: rgba(black, 0.87),
+    A400: white,
+    A700: white,
+  ),
+);
+
+$md-accent: (
+  50: #efebe9,
+  100: #d7ccc8,
+  200: #bcaaa4,
+  300: #a1887f,
+  400: #8d6e63,
+  500: #795548,
+  600: #6d4c41,
+  700: #5d4037,
+  800: #4e342e,
+  900: #3e2723,
+  A100: #d7ccc8,
+  A200: #bcaaa4,
+  A400: #8d6e63,
+  A700: #5d4037,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(black, 0.87),
+    A200: rgba(black, 0.87),
+    A400: white,
+    A700: white,
+  ),
+);
+
+$md-warn: (
+  50: #ffebef,
+  100: #cf6679,
+  200: #ff7597,
+  300: #e77179,
+  400: #f24e58,
+  500: #f83a40,
+  600: #e9313e,
+  700: #d72638,
+  800: #ff0266,
+  900: #bb0d24,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+  ),
+);
+
+$theme-primary-light: mat.define-palette($md-primary, 500, 700);
+$theme-accent-light: mat.define-palette($md-accent, 700, 900);
+
+$theme-primary-dark: mat.define-palette($md-primary, 200, 700);
+$theme-accent-dark: mat.define-palette($md-accent, 300);
+
+$theme-warn-light: mat.define-palette($md-warn, 800);
+$theme-warn-dark: mat.define-palette($md-warn, 200);
+
+$md-typography: mat.define-typography-config(
+  $font-family: Quicksand,
+);
+
+$dark-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: $theme-primary-dark,
+      accent: $theme-accent-dark,
+      warn: $theme-warn-dark,
+    ),
+    typography: $md-typography,
+  )
+);
+
+$light-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $theme-primary-light,
+      accent: $theme-accent-light,
+      warn: $theme-warn-light,
+    ),
+    typography: $md-typography,
+  )
+);
+
+.deep-orange-brown {
+  @include mat.all-component-themes($light-theme);
+  @include mat.typography-hierarchy($light-theme);
+
+  .active,
+  .selectable-item:hover {
+    background: mat.get-color-from-palette($md-primary, 400);
+
+    .mdc-list-item__primary-text {
+      color: mat.get-contrast-color-from-palette($md-primary, 400) !important;
+    }
+  }
+}
+
+.deep-orange-brown.dark-theme {
+  @include mat.all-component-themes($dark-theme);
+  @include mat.typography-hierarchy($dark-theme);
+
+  .active,
+  .selectable-item:hover {
+    background: mat.get-color-from-palette($md-primary, 300);
+
+    .mdc-list-item__primary-text {
+      color: mat.get-contrast-color-from-palette($md-primary, 300) !important;
+    }
+  }
+}

@@ -1,0 +1,73 @@
+// Variables
+:root {
+  --spacing: 1rem;
+}
+
+// Display
+.d-f {
+  display: flex;
+}
+.d-i-f {
+  display: inline-flex;
+}
+.d-b {
+  display: block;
+}
+.d-i-b {
+  display: inline-block;
+}
+
+// Flex
+.flex-0 {
+  flex: 1 1 0;
+}
+.flex-auto {
+  flex: 1 1 auto;
+}
+
+// Alignment
+.a-center {
+  align-items: center;
+}
+.a-start {
+  align-items: flex-start;
+}
+.a-end {
+  align-items: flex-end;
+}
+.j-start {
+  justify-content: flex-start;
+}
+.j-end {
+  justify-content: flex-end;
+}
+.j-center {
+  justify-content: center;
+}
+.j-around {
+  justify-content: space-around;
+}
+.j-between {
+  justify-content: space-between;
+}
+
+// Height, Width
+.h-100 {
+  height: 100%;
+}
+.w-100 {
+  width: 100%;
+}
+.min-h-0 {
+  min-height: 0;
+}
+.min-w-0 {
+  min-width: 0;
+}
+
+.p-md {
+  padding: var(--spacing);
+}
+.p-0 {
+  padding: 0 !important;
+}

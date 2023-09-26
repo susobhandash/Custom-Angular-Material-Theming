@@ -1,0 +1,159 @@
+@use "@angular/material" as mat;
+
+mat.$theme-ignore-duplication-warnings: true;
+
+@include mat.core();
+
+$md-primary: (
+  50: #f2e7fe,
+  100: #dbb2ff,
+  200: #bb86fc,
+  300: #985eff,
+  400: #7f39fb,
+  500: #6200ee,
+  600: #5600e8,
+  700: #3700b3,
+  800: #30009c,
+  900: #23036a,
+  A100: #ea80fc,
+  A200: #e040fb,
+  A400: #d500f9,
+  A700: #aa00ff,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(black, 0.87),
+    A200: white,
+    A400: white,
+    A700: white,
+  ),
+);
+
+$md-accent: (
+  50: #c8fff4,
+  100: #70efde,
+  200: #03dac5,
+  300: #00c4b4,
+  400: #00b3a6,
+  500: #01a299,
+  600: #019592,
+  700: #018786,
+  800: #017374,
+  900: #005457,
+  A100: #a7ffeb,
+  A200: #64ffda,
+  A400: #1de9b6,
+  A700: #00bfa5,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(black, 0.87),
+    A200: rgba(black, 0.87),
+    A400: rgba(black, 0.87),
+    A700: rgba(black, 0.87),
+  ),
+);
+
+$md-warn: (
+  50: #ffebef,
+  100: #cf6679,
+  200: #ff7597,
+  300: #e77179,
+  400: #f24e58,
+  500: #f83a40,
+  600: #e9313e,
+  700: #d72638,
+  800: #ff0266,
+  900: #bb0d24,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+  ),
+);
+
+$theme-primary-light: mat.define-palette($md-primary, 500, 700);
+$theme-accent-light: mat.define-palette($md-accent, 200, 900);
+
+$theme-primary-dark: mat.define-palette($md-primary, 200, 700);
+$theme-accent-dark: mat.define-palette($md-accent, 200);
+
+$theme-warn-light: mat.define-palette($md-warn, 800);
+$theme-warn-dark: mat.define-palette($md-warn, 200);
+
+$md-typography: mat.define-typography-config(
+  $font-family: Comfortaa,
+);
+
+$dark-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: $theme-primary-dark,
+      accent: $theme-accent-dark,
+      warn: $theme-warn-dark,
+    ),
+    typography: $md-typography,
+  )
+);
+
+$light-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $theme-primary-light,
+      accent: $theme-accent-light,
+      warn: $theme-warn-light,
+    ),
+    typography: $md-typography,
+  )
+);
+
+.purple-green {
+  @include mat.all-component-themes($light-theme);
+  @include mat.typography-hierarchy($light-theme);
+
+  .active,
+  .selectable-item:hover {
+    background: mat.get-color-from-palette($md-primary, 400);
+
+    .mdc-list-item__primary-text {
+      color: mat.get-contrast-color-from-palette($md-primary, 400) !important;
+    }
+  }
+}
+
+.purple-green.dark-theme {
+  @include mat.all-component-themes($dark-theme);
+  @include mat.typography-hierarchy($dark-theme);
+
+  .active,
+  .selectable-item:hover {
+    background: mat.get-color-from-palette($md-primary, 300);
+
+    .mdc-list-item__primary-text {
+      color: mat.get-contrast-color-from-palette($md-primary, 300) !important;
+    }
+  }
+}

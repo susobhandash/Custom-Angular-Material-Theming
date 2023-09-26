@@ -1,0 +1,159 @@
+@use "@angular/material" as mat;
+
+mat.$theme-ignore-duplication-warnings: true;
+
+@include mat.core();
+
+$md-primary: (
+  50: #fce4ec,
+  100: #f8bbd0,
+  200: #f48fb1,
+  300: #f06292,
+  400: #ec407a,
+  500: #e91e63,
+  600: #d81b60,
+  700: #c2185b,
+  800: #ad1457,
+  900: #880e4f,
+  A100: #ff80ab,
+  A200: #ff4081,
+  A400: #f50057,
+  A700: #c51162,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(black, 0.87),
+    A200: white,
+    A400: white,
+    A700: white,
+  ),
+);
+
+$md-accent: (
+  50: #eceff1,
+  100: #cfd8dc,
+  200: #b0bec5,
+  300: #90a4ae,
+  400: #78909c,
+  500: #607d8b,
+  600: #546e7a,
+  700: #455a64,
+  800: #37474f,
+  900: #263238,
+  A100: #cfd8dc,
+  A200: #b0bec5,
+  A400: #78909c,
+  A700: #455a64,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(black, 0.87),
+    A200: rgba(black, 0.87),
+    A400: white,
+    A700: white,
+  ),
+);
+
+$md-warn: (
+  50: #ffebef,
+  100: #cf6679,
+  200: #ff7597,
+  300: #e77179,
+  400: #f24e58,
+  500: #f83a40,
+  600: #e9313e,
+  700: #d72638,
+  800: #ff0266,
+  900: #bb0d24,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+  ),
+);
+
+$theme-primary-light: mat.define-palette($md-primary, 500, 700);
+$theme-accent-light: mat.define-palette($md-accent, 200, 900);
+
+$theme-primary-dark: mat.define-palette($md-primary, 200, 700);
+$theme-accent-dark: mat.define-palette($md-accent, 200);
+
+$theme-warn-light: mat.define-palette($md-warn, 800);
+$theme-warn-dark: mat.define-palette($md-warn, 200);
+
+$md-typography: mat.define-typography-config(
+  $font-family: Quicksand,
+);
+
+$dark-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: $theme-primary-dark,
+      accent: $theme-accent-dark,
+      warn: $theme-warn-dark,
+    ),
+    typography: $md-typography,
+  )
+);
+
+$light-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $theme-primary-light,
+      accent: $theme-accent-light,
+      warn: $theme-warn-light,
+    ),
+    typography: $md-typography,
+  )
+);
+
+.pink-blue-grey {
+  @include mat.all-component-themes($light-theme);
+  @include mat.typography-hierarchy($light-theme);
+
+  .active,
+  .selectable-item:hover {
+    background: mat.get-color-from-palette($md-primary, 400);
+
+    .mdc-list-item__primary-text {
+      color: mat.get-contrast-color-from-palette($md-primary, 400) !important;
+    }
+  }
+}
+
+.pink-blue-grey.dark-theme {
+  @include mat.all-component-themes($dark-theme);
+  @include mat.typography-hierarchy($dark-theme);
+
+  .active,
+  .selectable-item:hover {
+    background: mat.get-color-from-palette($md-primary, 300);
+
+    .mdc-list-item__primary-text {
+      color: mat.get-contrast-color-from-palette($md-primary, 300) !important;
+    }
+  }
+}

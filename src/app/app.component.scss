@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+
+  .example-container {
+    .example-sidenav {
+      width: 200px;
+    }
+  }
+}
