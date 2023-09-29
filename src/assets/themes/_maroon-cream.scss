@@ -1,0 +1,165 @@
+@use "../../../node_modules/@angular/material/" as mat;
+
+mat.$theme-ignore-duplication-warnings: true;
+
+@include mat.core();
+
+$md-primary: (
+  50: #fdeaf0,
+  100: #fccbd7,
+  200: #ec96a2,
+  300: #e36c7e,
+  400: #ef4560,
+  500: #f62849,
+  600: #e61d47,
+  700: #d40f40,
+  800: #c70038,
+  900: #b9002c,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+  ),
+);
+
+$md-accent: (
+  50: #fff5e0,
+  100: #ffe5b3,
+  200: #ffd583,
+  300: #ffc450,
+  400: #ffb627,
+  500: #ffa900,
+  600: #fe9d00,
+  700: #f98d00,
+  800: #f37d00,
+  900: #eb6400,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: rgba(black, 0.87),
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+  ),
+);
+
+$md-warn: (
+  50: #e5e8ee,
+  100: #bec5d7,
+  200: #959fbb,
+  300: #6e7ba0,
+  400: #50608e,
+  500: #33477d,
+  600: #2d4075,
+  700: #25376a,
+  800: #1e2d5d,
+  900: #141e46,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+  ),
+);
+
+$theme-primary-light: mat.define-palette($md-primary, 800, 500);
+$theme-accent-light: mat.define-palette($md-accent, 300, 200);
+
+$theme-primary-dark: mat.define-palette($md-primary, 400, 500);
+$theme-accent-dark: mat.define-palette($md-accent, 200);
+
+$theme-warn-light: mat.define-palette($md-warn, 900);
+$theme-warn-dark: mat.define-palette($md-warn, 200);
+
+$md-typography: mat.define-typography-config(
+  $font-family: Comfortaa,
+);
+
+$dark-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: $theme-primary-dark,
+      accent: $theme-accent-dark,
+      warn: $theme-warn-dark,
+    ),
+    typography: $md-typography,
+  )
+);
+
+$light-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $theme-primary-light,
+      accent: $theme-accent-light,
+      warn: $theme-warn-light,
+    ),
+    typography: $md-typography,
+  )
+);
+
+.maroon-cream {
+  @include mat.all-component-themes($light-theme);
+  @include mat.typography-hierarchy($light-theme);
+
+  .show-in-portrait.mat-toolbar.bottom-nav button {
+    color: mat.get-contrast-color-from-palette($md-accent, 300) !important;
+
+    mat-icon.active {
+      background-color: mat.get-color-from-palette($md-primary, 800) !important;
+      color: mat.get-contrast-color-from-palette($md-primary, 800) !important;
+    }
+  }
+
+  .selectable-item.active,
+  .selectable-item:hover {
+    background: mat.get-color-from-palette($md-primary, 800);
+
+    .mdc-list-item__primary-text,
+    .mdc-list-item__secondary-text,
+    .mat-mdc-list-item-icon {
+      color: mat.get-contrast-color-from-palette($md-primary, 800) !important;
+    }
+  }
+}
+
+.maroon-cream.dark-theme {
+  @include mat.all-component-themes($dark-theme);
+  @include mat.typography-hierarchy($dark-theme);
+
+  .show-in-portrait.mat-toolbar.bottom-nav button {
+    color: mat.get-contrast-color-from-palette($md-accent, 200) !important;
+
+    mat-icon.active {
+      background-color: mat.get-color-from-palette($md-primary, 400) !important;
+      color: mat.get-contrast-color-from-palette($md-primary, 400) !important;
+    }
+  }
+
+  .selectable-item.active,
+  .selectable-item:hover {
+    background: mat.get-color-from-palette($md-primary, 400);
+
+    .mdc-list-item__primary-text,
+    .mdc-list-item__secondary-text,
+    .mat-mdc-list-item-icon {
+      color: mat.get-contrast-color-from-palette($md-primary, 400) !important;
+    }
+  }
+}
