@@ -14,7 +14,7 @@
       mat-icon-button
       class="example-icon"
       aria-label="Example icon-button with theme mode toggle icon"
-      (click)="toggleThemeMode()"
+      (click)="themeService.toggleThemeMode()"
       matTooltip="Toggle Dark / Light theme"
       matTooltipPosition="below"
     >
@@ -98,9 +98,11 @@
 </div>
 <mat-menu #menu="matMenu">
   <ng-container *ngFor="let theme of themeOptions">
-    <button mat-menu-item (click)="toggleTheme(theme.value)">
+    <button mat-menu-item (click)="themeService.toggleTheme(theme.value)">
       <mat-icon role="img" color="primary">
-        <ng-container *ngIf="activeTheme === theme.value; else unchecked">
+        <ng-container
+          *ngIf="themeService.activeTheme === theme.value; else unchecked"
+        >
           radio_button_checked
         </ng-container>
       </mat-icon>

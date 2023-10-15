@@ -133,6 +133,7 @@ $light-theme: mat.define-light-theme(
 .purple-green {
   @include mat.all-component-themes($light-theme);
   @include mat.typography-hierarchy($light-theme);
+  --primary: #6200ee;
 
   .active,
   .selectable-item:hover {
@@ -147,6 +148,7 @@ $light-theme: mat.define-light-theme(
 .purple-green.dark-theme {
   @include mat.all-component-themes($dark-theme);
   @include mat.typography-hierarchy($dark-theme);
+  --primary: #bb86fc;
 
   .active,
   .selectable-item:hover {

@@ -133,6 +133,7 @@ $light-theme: mat.define-light-theme(
 .indigo-pink {
   @include mat.all-component-themes($light-theme);
   @include mat.typography-hierarchy($light-theme);
+  --primary: #3f51b5;
 
   .active,
   .selectable-item:hover {
@@ -147,6 +148,7 @@ $light-theme: mat.define-light-theme(
 .indigo-pink.dark-theme {
   @include mat.all-component-themes($dark-theme);
   @include mat.typography-hierarchy($dark-theme);
+  --primary: #9fa8da;
 
   .active,
   .selectable-item:hover {

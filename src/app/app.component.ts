@@ -1,26 +1,10 @@
 import { Component } from '@angular/core';
-
-export enum ThemeModes {
-  Light = 'light-theme',
-  Dark = 'dark-theme',
-}
-
-export enum ThemePaletts {
-  PurpleGreen = 'purple-green',
-  PinkBlueGrey = 'pink-blue-grey',
-  IndigoPink = 'indigo-pink',
-  DeepPurpleAmber = 'deep-purple-amber',
-  TealLime = 'teal-lime',
-  DeepOrangeBrown = 'deep-orange-brown',
-  BlueGreen = 'blue-green',
-  MaroonCream = 'maroon-cream',
-  DarkTealLightGreen = 'dark-teal-light-green',
-}
-
-export interface ThemeOptions {
-  text: string;
-  value: ThemePaletts;
-}
+import {
+  ThemeModes,
+  ThemeOptions,
+  ThemePaletts,
+  ThemeService,
+} from './services/ThemeService';
 
 @Component({
   selector: 'app-root',
@@ -29,9 +13,7 @@ export interface ThemeOptions {
 })
 export class AppComponent {
   title = 'Material Theming';
-  themeMode: ThemeModes = ThemeModes.Light;
-  activeTheme: ThemePaletts = ThemePaletts.PurpleGreen;
-  themePalette = ThemePaletts;
+  // themePalette = ThemePaletts;
   themeOptions: ThemeOptions[] = [
     { text: '(M) Purple Green', value: ThemePaletts.PurpleGreen },
     { text: '(M) Pink Blue Grey', value: ThemePaletts.PinkBlueGrey },
@@ -51,30 +33,15 @@ export class AppComponent {
   ];
   activeTab = 0;
 
-  constructor() {
-    this.toggleTheme(this.activeTheme);
-  }
+  constructor(public themeService: ThemeService) {
+    const themeMode = localStorage.getItem('activeThemeMode') as ThemeModes;
+    this.themeService.activeThemeMode = themeMode
+      ? themeMode
+      : ThemeModes.Light;
 
-  toggleTheme(theme: ThemePaletts) {
-    this.activeTheme = theme;
+    const theme = localStorage.getItem('activeTheme') as ThemePaletts;
+    this.themeService.activeTheme = theme ? theme : ThemePaletts.PurpleGreen;
 
-    this.themeOptions.forEach((option) => {
-      document.querySelector('body')?.classList.remove(option.value);
-    });
-
-    document.querySelector('body')?.classList.add(this.activeTheme);
-  }
-
-  toggleThemeMode(): void {
-    if (this.themeMode === ThemeModes.Light) {
-      this.themeMode = ThemeModes.Dark;
-    } else {
-      this.themeMode = ThemeModes.Light;
-    }
-
-    document.querySelector('body')?.classList.remove(ThemeModes.Dark);
-    document.querySelector('body')?.classList.remove(ThemeModes.Light);
-
-    document.querySelector('body')?.classList.add(this.themeMode);
+    this.themeService.toggleTheme(this.themeService.activeTheme);
   }
 }
