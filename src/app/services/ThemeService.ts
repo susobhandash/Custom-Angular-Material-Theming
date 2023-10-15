@@ -44,8 +44,7 @@ export class ThemeService {
     localStorage.setItem('activeTheme', this.activeTheme);
 
     setTimeout(() => {
-      const elem = document.querySelector(':root');
-      let cs = elem ? getComputedStyle(elem) : null;
+      let cs = body ? getComputedStyle(body) : null;
       if (cs) {
         const themeColor = cs.getPropertyValue('--primary');
         const themeMeta = this.document.getElementById(
